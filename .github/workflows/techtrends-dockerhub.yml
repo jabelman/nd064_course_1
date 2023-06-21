@@ -28,7 +28,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: project/techtrends
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/techtrends:latest
           file: project/techtrends/Dockerfile
