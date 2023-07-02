@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: techtrends
-          image: {{ .Values.username }}/{{ .Values.repository }}:{{ .Values.tag }}
+          image: "{{ .Values.username }}/{{ .Values.repository }}:{{ .Values.tag }}"
           ports:
             - containerPort: {{ .Values.containerPort }}
           livenessProbe:
