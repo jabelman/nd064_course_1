@@ -9,8 +9,30 @@ docker logs CONTAINER_ID
 Where the CONTAINER_ID is the ID of the Docker container that runs an application.
 
 ## Logs from the container running the TechTrends application
- * Serving Flask app 'app' (lazy loading)
+* Serving Flask app 'app' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
- * Debug mode: off
+ * Debug mode: on
+WARNING: werkzeug - [2023-07-02 19:55:07,210] -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+WARNING: werkzeug - [2023-07-02 19:55:07,210] -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO: werkzeug - [2023-07-02 19:55:07,210] -  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
+INFO: werkzeug - [2023-07-02 19:55:07,210] -  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
+INFO: werkzeug - [2023-07-02 19:55:07,211] -  * Restarting with stat
+INFO: werkzeug - [2023-07-02 19:55:07,211] -  * Restarting with stat
+WARNING: werkzeug - [2023-07-02 19:55:07,332] -  * Debugger is active!
+WARNING: werkzeug - [2023-07-02 19:55:07,332] -  * Debugger is active!
+INFO: werkzeug - [2023-07-02 19:55:07,332] -  * Debugger PIN: 117-339-968
+INFO: werkzeug - [2023-07-02 19:55:07,332] -  * Debugger PIN: 117-339-968
+INFO: werkzeug - [2023-07-02 19:55:23,653] - 172.17.0.1 - - [02/Jul/2023 19:55:23] "GET / HTTP/1.1" 200 -
+INFO: werkzeug - [2023-07-02 19:55:23,653] - 172.17.0.1 - - [02/Jul/2023 19:55:23] "GET / HTTP/1.1" 200 -
+INFO: werkzeug - [2023-07-02 19:55:23,662] - 172.17.0.1 - - [02/Jul/2023 19:55:23] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO: werkzeug - [2023-07-02 19:55:23,662] - 172.17.0.1 - - [02/Jul/2023 19:55:23] "GET /static/css/main.css HTTP/1.1" 304 -
+DEBUG: app - [2023-07-02 19:55:26,090] - The "About Us" page is retrieved
+DEBUG: app - [2023-07-02 19:55:26,090] - The "About Us" page is retrieved
+INFO: werkzeug - [2023-07-02 19:55:26,092] - 172.17.0.1 - - [02/Jul/2023 19:55:26] "GET /about HTTP/1.1" 200 -
+INFO: werkzeug - [2023-07-02 19:55:26,092] - 172.17.0.1 - - [02/Jul/2023 19:55:26] "GET /about HTTP/1.1" 200 -
+INFO: werkzeug - [2023-07-02 19:55:26,098] - 172.17.0.1 - - [02/Jul/2023 19:55:26] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO: werkzeug - [2023-07-02 19:55:26,098] - 172.17.0.1 - - [02/Jul/2023 19:55:26] "GET /static/css/main.css HTTP/1.1" 304 -

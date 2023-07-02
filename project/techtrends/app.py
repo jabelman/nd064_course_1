@@ -1,14 +1,20 @@
 import sqlite3
 import logging
+import sys
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
+
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
 def get_db_connection():
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
+
+    global conn_count
+    conn_count += 1
+
     return connection
 
 # Function to get a post using its ID
@@ -22,6 +28,8 @@ def get_post(post_id):
 # Define the Flask application
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
+
+conn_count = 0
 
 # Define the main route of the web application 
 @app.route('/')
@@ -37,18 +45,15 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-        app.logger.info('A non-existing article is accessed and a 404 page is returned')
         app.logger.debug('A non-existing article is accessed and a 404 page is returned')
         return render_template('404.html'), 404
     else:
-        app.logger.info('Article "{}" retrieved!'.format(post['title']))
         app.logger.debug('Article "{}" retrieved!'.format(post['title']))
         return render_template('post.html', post=post)
 
 # Define the About Us page
 @app.route('/about')
 def about():
-    app.logger.info('The "About Us" page is retrieved')
     app.logger.debug('The "About Us" page is retrieved')
     return render_template('about.html')
 
@@ -68,7 +73,6 @@ def create():
             connection.commit()
             connection.close()
 
-            app.logger.info('Article "{}" created!'.format(title))
             app.logger.debug('Article "{}" created!'.format(title))
 
             return redirect(url_for('index'))
@@ -92,7 +96,7 @@ def metrics():
     posts = connection.execute('SELECT * FROM posts').fetchall()
     connection.close()
     response = app.response_class(
-        response=json.dumps({"status":"success","code":200,"data":{"db_connection_count":1,"post_count":len(posts)}}),
+        response=json.dumps({"status":"success","code":200,"data":{"db_connection_count":conn_count,"post_count":len(posts)}}),
         status=200,
         mimetype='application/json'
     )
@@ -101,5 +105,9 @@ def metrics():
 # start the application on port 3111
 if __name__ == "__main__":
    ## stream logs to a file
-   logging.basicConfig(filename='app.log',level=logging.INFO)
-   app.run(host='0.0.0.0', port='3111')
+   stdout_handler = logging.StreamHandler(sys.stdout)
+   stderr_handler = logging.StreamHandler(sys.stderr)
+   format_output = '%(levelname)s: %(name)-2s - [%(asctime)s] - %(message)s'
+   handlers=[stdout_handler, stderr_handler]
+   logging.basicConfig(level=logging.DEBUG, handlers=handlers, format=format_output)
+   app.run(debug=True, host='0.0.0.0', port='3111')
