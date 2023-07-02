@@ -1,0 +1,9 @@
+apiVersion: v1
+name: techtrends 
+keywords:
+- techtrends
+version: 1.0.0
+## List of maintainers, their names, and method of contact
+maintainers:
+- name: Josh Abelman
+  email: abelmanjosh@gmail.com
